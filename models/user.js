@@ -3,6 +3,8 @@ const { Schema, model } = require("mongoose");
 const emailRegexp =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
+const userSubscriptions = ["starter", "pro", "business"];
+
 const userSchema = new Schema(
   {
     password: {
@@ -17,10 +19,13 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: userSubscriptions,
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String,
+      default: "",
+    },
   },
   { versionKey: false, timestamps: true }
 );
