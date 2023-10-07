@@ -7,14 +7,16 @@ const validateBody = require("../../middlewares/validateBody");
 const authenticate = require("../../middlewares/authenticate");
 const { schemas } = require("../../schema/contact");
 
+router.use(authenticate); 
+
 router.post("/register", validateBody(schemas.authSchema), ctrlWrapper(ctrl.register));
 
 router.post("/login", validateBody(schemas.authSchema), ctrlWrapper(ctrl.login));
 
-router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
+router.get("/current", ctrlWrapper(ctrl.getCurrent));
 
-router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
+router.get("/logout", ctrlWrapper(ctrl.logout));
 
-router.patch("/subscription", authenticate, validateBody(schemas.subscriptionSchema), ctrlWrapper(ctrl.updSubscription));
+router.patch("/subscription", validateBody(schemas.subscriptionSchema), ctrlWrapper(ctrl.updSubscription));
 
 module.exports = router;
