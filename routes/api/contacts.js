@@ -4,7 +4,10 @@ const router = express.Router();
 const ctrl = require("../../controllers/contacts");
 const ctrlWrapper = require("../../helpers/ctrlWrapper");
 const validateBody = require("../../middlewares/validateBody");
+const authenticate = require("../../middlewares/authenticate");
 const { schemas } = require("../../schema/contact");
+
+router.use(authenticate); 
 
 router.get("/", ctrlWrapper(ctrl.getAll));
 router.post("/", validateBody(schemas.addSchema), ctrlWrapper(ctrl.add));
