@@ -27,11 +27,16 @@ const subscriptionSchema = Joi.object({
     .required(),
 });
 
+const verifyEmailSchema = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
 const schemas = {
   addSchema,
   updateFavorite,
   authSchema,
   subscriptionSchema,
+  verifyEmailSchema,
 };
 
 module.exports = { schemas };
